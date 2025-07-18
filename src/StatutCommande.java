@@ -1,3 +1,6 @@
 public enum StatutCommande {
-    EN_ATTENTE, EXPEDIEE, LIVREE, ANNULEE
+    EN_ATTENTE,
+    EXPEDIEE,
+    LIVREE,
+    ANNULEE
 }

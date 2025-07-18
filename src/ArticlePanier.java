@@ -18,4 +18,8 @@ public class ArticlePanier {
     public int getQuantite() {
         return quantite;
     }
+
+    public void setQuantite(int quantite) {
+        this.quantite = quantite;
+    }
 }

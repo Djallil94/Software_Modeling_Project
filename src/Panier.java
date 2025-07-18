@@ -1,11 +1,29 @@
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Panier {
     private List<ArticlePanier> articles = new ArrayList<>();
 
     public void ajouterProduit(Produit produit, int quantite) {
+        if (produit == null || quantite <= 0) {
+            System.out.println("Impossible d'ajouter un produit invalide ou une quantité nulle/négative au panier.");
+            return;
+        }
+
+        for (ArticlePanier item : articles) {
+            if (item.getProduit().equals(produit)) {
+                item.setQuantite(item.getQuantite() + quantite);
+                System.out.println("Quantité de " + produit.getNom() + " mise à jour dans le panier.");
+                return;
+            }
+        }
         articles.add(new ArticlePanier(produit, quantite));
-        ServiceNotification.getInstance().notifier("Produit ajouté au panier : " + produit.getNom());
+        System.out.println(produit.getNom() + " (" + quantite + ") ajouté au panier.");
+    }
+
+    public void retirerProduit(Produit produit) {
+        articles.removeIf(item -> item.getProduit().equals(produit));
+        System.out.println(produit.getNom() + " retiré du panier.");
     }
 
     public double calculerTotal() {
@@ -14,13 +32,14 @@ public class Panier {
 
     public void viderPanier() {
         articles.clear();
-    }
-
-    public List<ArticlePanier> getItems() {
-        return articles;
+        System.out.println("Panier vidé.");
     }
 
     public List<ArticlePanier> getArticles() {
-        return articles;
+        return new ArrayList<>(articles); // Retourne une copie pour éviter les modifications externes
+    }
+
+    public boolean estVide() {
+        return articles.isEmpty();
     }
 }

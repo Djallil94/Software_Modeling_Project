@@ -1,10 +1,13 @@
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
 
 public class ServiceNotification {
     private static ServiceNotification instance;
-    private List<Observateur> observateurs = new ArrayList<>();
+    private List<Observateur> observateurs;
 
-    private ServiceNotification() {}
+    private ServiceNotification() {
+        observateurs = new ArrayList<>();
+    }
 
     public static ServiceNotification getInstance() {
         if (instance == null) {
@@ -14,7 +17,15 @@ public class ServiceNotification {
     }
 
     public void sAbonner(Observateur o) {
-        observateurs.add(o);
+        if (o != null && !observateurs.contains(o)) {
+            observateurs.add(o);
+            System.out.println("Observateur abonné : " + o.getClass().getSimpleName());
+        }
+    }
+
+    public void seDesabonner(Observateur o) {
+        observateurs.remove(o);
+        System.out.println("Observateur désabonné : " + o.getClass().getSimpleName());
     }
 
     public void notifier(String message) {

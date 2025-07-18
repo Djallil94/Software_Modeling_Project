@@ -2,18 +2,20 @@ public class Client extends Utilisateur {
     private Panier panier;
 
     public Client(String id, String nom, String email) {
-        this.id = id;
-        this.nom = nom;
-        this.email = email;
+        super(id, nom, email, "default_password"); // Mot de passe par défaut pour simplifier
         this.panier = new Panier();
-    }
-
-    public Panier getPanier() {
-        return panier;
     }
 
     @Override
     public void afficherProfil() {
-        System.out.println("Client : " + nom + ", Email : " + email);
+        System.out.println("--- Profil Client ---");
+        System.out.println("ID: " + id);
+        System.out.println("Nom: " + nom);
+        System.out.println("Email: " + email);
+        System.out.println("---------------------");
+    }
+
+    public Panier getPanier() {
+        return panier;
     }
 }
